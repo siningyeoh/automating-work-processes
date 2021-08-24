@@ -25,10 +25,11 @@ for column in postdf.iloc[:,:-1]:
 
   message = MIMEMultipart()
   message['Subject'] = "Partnership Development"
-  #personalise it and send it in email body
-  message.attach(MIMEText('Dear colleague, please find your survey results below.'))
-  message_body = MIMEText('<br><img src="cid:%s"><br>' % ('final.png'), 'html')  
-  message.attach(message_body)
+  message['From']= own_email
+  message['To']=column
+  #personalise it
+  message.attach(MIMEText('''Dear colleague, please find your survey results below.
+    <br><img src="cid:%s"><br>''' % ('final.png'), 'html'))
 
   #improve this section
   file = open('final.png', 'rb')                                                    
